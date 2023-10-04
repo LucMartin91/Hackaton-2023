@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Watcher</title>
+  <title>Hackathon 2023</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -37,7 +37,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
           <a class="navbar-brand" href="index.html">
             <span>
-              Watcher
+              Hackathon 2023
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -55,10 +55,7 @@
                   <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.html"> Our Watches </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
+                  <a class="nav-link" href="watch.html"> Top 5 </a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -77,25 +74,19 @@
 
   <section class="contact_section layout_padding">
     <h2 class="custom_heading text-center">
-      NOW CONTACT US
+      CONNEXION
     </h2>
     <div class="container mt-5 pt-5">
       <form action="">
         <div>
-          <input type="text" placeholder="NAME">
-        </div>
-        <div>
           <input type="email" placeholder="EMAIL">
         </div>
         <div>
-          <input type="text" placeholder="PHONE NUMBER">
-        </div>
-        <div>
-          <input type="text" class="message-box" placeholder="MESSAGE">
+          <input type="password" placeholder="MOT DE PASSE">
         </div>
         <div class="d-flex justify-content-center mt-5 pt-5">
           <button>
-            SEND
+            se connecter
           </button>
         </div>
       </form>
@@ -179,6 +170,45 @@
         document.body.classList.remove('show-search');
         document.querySelector('.search-popup').style.display = 'none';
       }
+    });
+  </script>
+  <script>
+    // Fonction pour obtenir la valeur d'un cookie
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+
+    // Fonction pour définir un cookie
+    function setCookie(name, value, minutes) {
+      var expires = "";
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Mettez à jour le statut en fonction de la présence du cookie
+    function updateStatus() {
+      if (getCookie("user")) {
+        document.getElementById("status").textContent = "Déconnexion";
+      } else {
+        document.getElementById("status").textContent = "Connexion";
+      }
+    }
+
+    updateStatus();
+
+    document.getElementById("status").addEventListener("click", function () {
+      if (getCookie("user")) {
+        setCookie("user", "", -1);  // Efface le cookie
+      } else {
+        setCookie("user", "loggedIn", 0.5);  // Crée un cookie avec une durée de vie de 30 minutes
+      }
+      updateStatus();
     });
   </script>
 </body>

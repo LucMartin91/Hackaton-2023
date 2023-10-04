@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Watcher</title>
+  <title>Hackathon 2023</title>
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css"
@@ -37,7 +37,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
           <a class="navbar-brand" href="index.html">
             <span>
-              Watcher
+              Hackathon 2023
             </span>
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -55,10 +55,10 @@
                   <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.html"> Our Watches </a>
+                  <a class="nav-link" href="watch.html"> Top 5 </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
+                  <a class="nav-link" id="status" href="contact.html">Connexion</a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -80,7 +80,7 @@
       <div class="container">
         <div class="brand_heading">
           <h3 class="custom_heading">
-            Our watch brands
+            Top 5 des meilleures villes classées en fonction de l'indicateur de qualité de vie
           </h3>
           <p class="font-weight-bold">
             It is a long established fact that a reader will be distracted by the readable content of a page
@@ -91,15 +91,15 @@
         <div class="brand_item-box">
           <div class="brand_img-box  item-1">
             <a href="">
-              View More
+              Voir plus..
             </a>
           </div>
           <div class="brand_detail-box">
             <h5>
-              $<span> 40 </span>
+              Indicateur global :<span> Valeur </span>
             </h5>
             <h6 class="">
-              best watch
+              Nom de l'endroit
             </h6>
           </div>
         </div>
@@ -111,10 +111,10 @@
           </div>
           <div class="brand_detail-box">
             <h5>
-              $<span> 50 </span>
+              Indicateur global :<span> valeur </span>
             </h5>
             <h6 class="">
-              best watch
+              Nom de l'endroit
             </h6>
           </div>
         </div>
@@ -126,10 +126,10 @@
           </div>
           <div class="brand_detail-box">
             <h5>
-              $<span> 60 </span>
+              Indicateur global :<span> valeur </span>
             </h5>
             <h6 class="">
-              best watch
+              Nom de l'endroit
             </h6>
           </div>
         </div>
@@ -141,10 +141,10 @@
           </div>
           <div class="brand_detail-box">
             <h5>
-              $<span> 70 </span>
+              Indicateur global :<span> valeur </span>
             </h5>
             <h6 class="">
-              best watch
+              Nom de l'endroit
             </h6>
           </div>
         </div>
@@ -156,10 +156,10 @@
           </div>
           <div class="brand_detail-box">
             <h5>
-              $<span> 80 </span>
+              Indicateur global :<span> valeur </span>
             </h5>
             <h6 class="">
-              best watch
+              Nom de l'endroit
             </h6>
           </div>
         </div>
@@ -247,6 +247,45 @@
         document.body.classList.remove('show-search');
         document.querySelector('.search-popup').style.display = 'none';
       }
+    });
+  </script>
+  <script>
+    // Fonction pour obtenir la valeur d'un cookie
+    function getCookie(name) {
+      var value = "; " + document.cookie;
+      var parts = value.split("; " + name + "=");
+      if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+
+    // Fonction pour définir un cookie
+    function setCookie(name, value, minutes) {
+      var expires = "";
+      if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    // Mettez à jour le statut en fonction de la présence du cookie
+    function updateStatus() {
+      if (getCookie("user")) {
+        document.getElementById("status").textContent = "Déconnexion";
+      } else {
+        document.getElementById("status").textContent = "Connexion";
+      }
+    }
+
+    updateStatus();
+
+    document.getElementById("status").addEventListener("click", function () {
+      if (getCookie("user")) {
+        setCookie("user", "", -1);  // Efface le cookie
+      } else {
+        setCookie("user", "loggedIn", 0.5);  // Crée un cookie avec une durée de vie de 30 minutes
+      }
+      updateStatus();
     });
   </script>
 </body>

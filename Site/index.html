@@ -12,10 +12,11 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Watcher</title>
+  <title>Hackathon 2023</title>
 
   <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -27,30 +28,30 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
-<style>
-.search-popup {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    border: 1px solid #ccc;
-    width: 200px;
-    z-index: 1001;
-}
+  <style>
+    .search-popup {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      width: 200px;
+      z-index: 1001;
+    }
 
-body.show-search::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
-</style>
+    body.show-search::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+  </style>
 
 </head>
 
@@ -62,10 +63,11 @@ body.show-search::before {
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
           <a class="navbar-brand" href="index.html">
             <span>
-              Watcher
+              Hackathon 2023
             </span>
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
@@ -79,33 +81,33 @@ body.show-search::before {
                   <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.html"> Our Watches </a>
+                  <a class="nav-link" href="watch.html"> Top 5</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="contact.html">Contact us</a>
+                  <a class="nav-link" id="status" href="contact.html">Connexion</a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
               </form>
-<div class="search-popup">
-    <input type="text" placeholder="Rechercher...">
-</div>
+              <div class="search-popup">
+                <input type="text" placeholder="Rechercher...">
+              </div>
 
-<script>
-document.querySelector('.nav_search-btn').addEventListener('click', function(event) {
-    event.preventDefault();
-    document.querySelector('.search-popup').style.display = 'block';
-    document.body.classList.add('show-search');
-});
+              <script>
+                document.querySelector('.nav_search-btn').addEventListener('click', function (event) {
+                  event.preventDefault();
+                  document.querySelector('.search-popup').style.display = 'block';
+                  document.body.classList.add('show-search');
+                });
 
-document.addEventListener('click', function(event) {
-    if (!event.target.closest('.search-popup') && !event.target.closest('.nav_search-btn')) {
-        document.body.classList.remove('show-search');
-        document.querySelector('.search-popup').style.display = 'none';
-    }
-});
-</script>
+                document.addEventListener('click', function (event) {
+                  if (!event.target.closest('.search-popup') && !event.target.closest('.nav_search-btn')) {
+                    document.body.classList.remove('show-search');
+                    document.querySelector('.search-popup').style.display = 'none';
+                  }
+                });
+              </script>
 
             </div>
           </div>
@@ -133,18 +135,19 @@ document.addEventListener('click', function(event) {
                       <div class="slider_item-detail">
                         <div>
                           <h1>
-                            Stylish watches
+                            Nom de l'endroit (vile, etc)
                           </h1>
                           <p>
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco l
+                            Indicateur 1 : valeur
                           </p>
+                          <p>Indicateur 2 : valeur </p>
+                          <p>Indicateur 3 : valeur </p>
                           <div class="d-flex">
                             <a href="" class="slider-btn1 mr-3">
                               Read More
                             </a>
-                            <a href="" class="slider-btn2">
-                              Contact Us
+                            <a href="" id="status" class="slider-btn2">
+                              Connexion
                             </a>
                           </div>
                         </div>
@@ -172,19 +175,59 @@ document.addEventListener('click', function(event) {
                       <div class="slider_item-detail">
                         <div>
                           <h1>
-                            Stylish watches
+                            Nom de l'endroit (vile, etc)
                           </h1>
                           <p>
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco l
+                            Indicateur 1 : valeur
                           </p>
+                          <p>Indicateur 2 : valeur </p>
+                          <p>Indicateur 3 : valeur </p>
                           <div class="d-flex">
                             <a href="" class="slider-btn1 mr-3">
                               Read More
                             </a>
-                            <a href="" class="slider-btn2">
-                              Contact Us
+                            <a href="" id="status" class="slider-btn2">
+                              Connexion
                             </a>
+                            <script>
+                              // Fonction pour obtenir la valeur d'un cookie
+                              function getCookie(name) {
+                                var value = "; " + document.cookie;
+                                var parts = value.split("; " + name + "=");
+                                if (parts.length == 2) return parts.pop().split(";").shift();
+                              }
+
+                              // Fonction pour définir un cookie
+                              function setCookie(name, value, minutes) {
+                                var expires = "";
+                                if (minutes) {
+                                  var date = new Date();
+                                  date.setTime(date.getTime() + (minutes * 60 * 1000));
+                                  expires = "; expires=" + date.toUTCString();
+                                }
+                                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                              }
+
+                              // Mettez à jour le statut en fonction de la présence du cookie
+                              function updateStatus() {
+                                if (getCookie("user")) {
+                                  document.getElementById("status").textContent = "Déconnexion";
+                                } else {
+                                  document.getElementById("status").textContent = "Connexion";
+                                }
+                              }
+
+                              updateStatus();
+
+                              document.getElementById("status").addEventListener("click", function () {
+                                if (getCookie("user")) {
+                                  setCookie("user", "", -1);  // Efface le cookie
+                                } else {
+                                  setCookie("user", "loggedIn", 0.5);  // Crée un cookie avec une durée de vie de 30 minutes
+                                }
+                                updateStatus();
+                              });
+                            </script>
                           </div>
                         </div>
                       </div>
@@ -211,18 +254,19 @@ document.addEventListener('click', function(event) {
                       <div class="slider_item-detail">
                         <div>
                           <h1 class="">
-                            Stylish watches
+                            Nom de l'endroit (ville etc)
                           </h1>
                           <p>
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                            aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco l
+                            Indicateur 1 : valeur
                           </p>
+                          <p>Indicateur 2 : valeur </p>
+                          <p>Indicateur 3 : valeur </p>
                           <div class="d-flex">
                             <a href="" class="slider-btn1 mr-3">
                               Read More
                             </a>
-                            <a href="" class="slider-btn2">
-                              Contact Us
+                            <a href="" id="status" class="slider-btn2">
+                              Connexion
                             </a>
                           </div>
                         </div>
@@ -249,135 +293,9 @@ document.addEventListener('click', function(event) {
   </div>
   <div class="bg">
 
-    <!-- about section -->
-    <section class="about_section layout_padding">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-5 offset-md-2">
-            <div class="about_detail-box">
-              <h3 class="custom_heading ">
-                About our watch
-              </h3>
-              <p class="">
-                It is a long established fact that a reader will be distracted by the readable content of a page when
-                looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
-                of
-                letters, as opposed to using 'Content here, content here', making it
-              </p>
-              <div>
-                <a href="">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="about_img-box">
-              <img src="images/about.png" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
 
-    <!-- end about section -->
 
-    <!-- brand section -->
-
-    <section class="brand_section layout_padding2">
-      <div class="container">
-        <div class="brand_heading">
-          <h3 class="custom_heading">
-            Our watch brands
-          </h3>
-          <p class="font-weight-bold">
-            It is a long established fact that a reader will be distracted by the readable content of a page
-          </p>
-        </div>
-      </div>
-      <div class="container-fluid brand_item-container">
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-1">
-            <a href="">
-              View More
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              $<span> 40 </span>
-            </h5>
-            <h6 class="">
-              best watch
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-2">
-            <a href="">
-              View More
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              $<span> 50 </span>
-            </h5>
-            <h6 class="">
-              best watch
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-3">
-            <a href="">
-              View More
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              $<span> 60 </span>
-            </h5>
-            <h6 class="">
-              best watch
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-4">
-            <a href="">
-              View More
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              $<span> 70 </span>
-            </h5>
-            <h6 class="">
-              best watch
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-5">
-            <a href="">
-              View More
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              $<span> 80 </span>
-            </h5>
-            <h6 class="">
-              best watch
-            </h6>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-
-    <!-- end brand section -->
 
     <!-- why section -->
     <section class="why_section layout_padding">
@@ -410,10 +328,10 @@ document.addEventListener('click', function(event) {
             </div>
             <div class="detail_box">
               <h5>
-                Free Shiping
+                Solution gratuite
               </h5>
               <p>
-                variations of passages of Lorem Ipsum available, but the majority have suffered
+                Utilisation gratuite de nos API pour contrôler la qualité de vie dans notre
               </p>
             </div>
           </div>
@@ -475,20 +393,20 @@ document.addEventListener('click', function(event) {
                   </div>
                   <div class="name_box">
                     <h5>
-                      Sandy Den
+                      Daniele Dos Santos
                     </h5>
                     <h6>
-                      Many Variations
+                      Superbe solution !
                     </h6>
                   </div>
                 </div>
                 <div class="detail_text">
                   <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                    alteration
-                    in some form, by injected humour, or randomised words which don't look even slightly believable. If
-                    you
-                    are going to use a passage of Lorem Ipsum, you need to beThere are many variations of passages
+                    "Ce site est un outil incontournable pour tous ceux qui cherchent à optimiser leur temps et leur
+                    santé. Les données météorologiques sont précises et faciles à comprendre, tandis que les
+                    informations sur la qualité de l'air me permettent de planifier mes activités en extérieur de
+                    manière plus responsable. De plus, les mises à jour sur le trafic routier me sauvent du temps et de
+                    la frustration. Une ressource vraiment complète !"
                   </p>
                 </div>
               </div>
@@ -505,20 +423,19 @@ document.addEventListener('click', function(event) {
                   </div>
                   <div class="name_box">
                     <h5>
-                      Sandy Den
+                      José Lafitte
                     </h5>
                     <h6>
-                      Many Variations
+                      Facilité déconcertante
                     </h6>
                   </div>
                 </div>
                 <div class="detail_text">
                   <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                    alteration
-                    in some form, by injected humour, or randomised words which don't look even slightly believable. If
-                    you
-                    are going to use a passage of Lorem Ipsum, you need to beThere are many variations of passages
+                    "Je suis impressionné par la facilité d'utilisation de ce site. Les interfaces sont intuitives, et
+                    je peux obtenir toutes les informations dont j'ai besoin en quelques clics seulement. Le fait que le
+                    site combine à la fois la météo, la qualité de l'air et les conditions de trafic en fait un guichet
+                    unique pour toutes mes préoccupations quotidiennes."
                   </p>
                 </div>
               </div>
@@ -535,20 +452,19 @@ document.addEventListener('click', function(event) {
                   </div>
                   <div class="name_box">
                     <h5>
-                      Sandy Den
+                      Michel Blanchon
                     </h5>
                     <h6>
-                      Many Variations
+                      Données précises
                     </h6>
                   </div>
                 </div>
                 <div class="detail_text">
                   <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                    alteration
-                    in some form, by injected humour, or randomised words which don't look even slightly believable. If
-                    you
-                    are going to use a passage of Lorem Ipsum, you need to beThere are many variations of passages
+                    "La valeur ajoutée de ce site est indéniable. La présentation visuelle est propre et moderne, ce qui
+                    rend la navigation agréable. Les données sont mises à jour régulièrement, ce qui me donne
+                    l'assurance que je consulte des informations fiables et à jour. C'est le genre de site que tout le
+                    monde devrait avoir dans ses favoris !"
                   </p>
                 </div>
               </div>
@@ -570,36 +486,6 @@ document.addEventListener('click', function(event) {
 
   <!-- end client section -->
 
-  <!-- contact section -->
-
-  <section class="contact_section layout_padding">
-    <h2 class="custom_heading text-center">
-      NOW CONTACT US
-    </h2>
-    <div class="container mt-5 pt-5">
-      <form action="">
-        <div>
-          <input type="text" placeholder="NAME">
-        </div>
-        <div>
-          <input type="email" placeholder="EMAIL">
-        </div>
-        <div>
-          <input type="text" placeholder="PHONE NUMBER">
-        </div>
-        <div>
-          <input type="text" class="message-box" placeholder="MESSAGE">
-        </div>
-        <div class="d-flex justify-content-center mt-5 pt-5">
-          <button>
-            SEND
-          </button>
-        </div>
-      </form>
-    </div>
-  </section>
-
-  <!-- end contact section -->
 
   <!-- info section -->
   <section class="info_section layout_padding">
