@@ -181,45 +181,6 @@
                           <p>Indicateur 3 : valeur </p>
                           <div class="d-flex">
                             SCORE GLOBAL
-                            <script>
-                              // Fonction pour obtenir la valeur d'un cookie
-                              function getCookie(name) {
-                                var value = "; " + document.cookie;
-                                var parts = value.split("; " + name + "=");
-                                if (parts.length == 2) return parts.pop().split(";").shift();
-                              }
-
-                              // Fonction pour définir un cookie
-                              function setCookie(name, value, minutes) {
-                                var expires = "";
-                                if (minutes) {
-                                  var date = new Date();
-                                  date.setTime(date.getTime() + (minutes * 60 * 1000));
-                                  expires = "; expires=" + date.toUTCString();
-                                }
-                                document.cookie = name + "=" + (value || "") + expires + "; path=/";
-                              }
-
-                              // Mettez à jour le statut en fonction de la présence du cookie
-                              function updateStatus() {
-                                if (getCookie("user")) {
-                                  document.getElementById("status").textContent = "Déconnexion";
-                                } else {
-                                  document.getElementById("status").textContent = "Connexion";
-                                }
-                              }
-
-                              updateStatus();
-
-                              document.getElementById("status").addEventListener("click", function () {
-                                if (getCookie("user")) {
-                                  setCookie("user", "", -1);  // Efface le cookie
-                                } else {
-                                  setCookie("user", "loggedIn", 0.5);  // Crée un cookie avec une durée de vie de 30 minutes
-                                }
-                                updateStatus();
-                              });
-                            </script>
                           </div>
                         </div>
                       </div>
