@@ -38,7 +38,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand" href="index.php">
+          <a class="navbar-brand" href="index.html">
             <span>
               Hackathon 2023
             </span>
@@ -52,13 +52,13 @@
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.php"> About </a>
+                  <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.php"> Top 5 </a>
+                  <a class="nav-link" href="watch.html"> Top 5 </a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -69,30 +69,29 @@
       </div>
     </header>
     <!-- end header section -->
-
   </div>
 
-
   <!-- contact section -->
-
   <section class="contact_section layout_padding">
     <h2 class="custom_heading text-center">
       CONNEXION
     </h2>
     <div class="container mt-5 pt-5">
-      <div>
-        <input type="email" placeholder="EMAIL">
-      </div>
-      <div>
-        <input type="password" placeholder="MOT DE PASSE">
-      </div>
-      <div class="d-flex justify-content-center mt-5 pt-5">
-        <form action="index.php">
-          <button>
+      <form id="connexionForm" action="index.html">
+        <div>
+          <input type="email" id="loginEmail" placeholder="EMAIL">
+        </div>
+        <div>
+          <input type="password" id="loginPassword" placeholder="MOT DE PASSE">
+        </div>
+        <div class="d-flex justify-content-center mt-5 pt-5">
+          <button type="submit">
             se connecter
           </button>
-        </form>
-        <form action="register.php">
+        </div>
+      </form>
+      <div class="d-flex justify-content-center mt-5 pt-5">
+        <form action="register.html">
           <button>
             pas encore inscrit?
           </button>
@@ -100,8 +99,6 @@
       </div>
     </div>
   </section>
-
-  <!-- end contact section -->
 
   <!-- info section -->
   <section class="info_section layout_padding">
@@ -147,10 +144,6 @@
     </div>
   </section>
 
-
-
-  <!-- end info_section -->
-
   <!-- footer section -->
   <section class="container-fluid footer_section">
     <p>
@@ -158,13 +151,10 @@
       <a href="https://html.design/">Free Html Templates</a>
     </p>
   </section>
-  <!-- footer section -->
 
+  <!-- scripts -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-  <div class="search-popup">
-    <input type="text" placeholder="Rechercher...">
-  </div>
 
   <script>
     document.querySelector('.nav_search-btn').addEventListener('click', function (event) {
@@ -178,6 +168,24 @@
         document.body.classList.remove('show-search');
         document.querySelector('.search-popup').style.display = 'none';
       }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const form = document.getElementById('connexionForm');
+      form.addEventListener('submit', function (e) {
+        const email = document.getElementById('loginEmail').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+
+        if (!email || !password) {
+          e.preventDefault();
+          alert('Les deux champs sont obligatoires !');
+
+          document.getElementById('loginEmail').style.borderColor = email ? '' : 'red';
+          document.getElementById('loginPassword').style.borderColor = password ? '' : 'red';
+        }
+      });
     });
   </script>
 </body>
