@@ -1,12 +1,23 @@
 <?php
   include 'db_connect.php';
-  ?>
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -64,7 +75,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand" href="index.php">
+          <a class="navbar-brand" href="index.html">
             <span>
               Hackathon 2023
             </span>
@@ -78,25 +89,23 @@
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.php"> About </a>
+                  <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.php"> Top 5</a>
+                  <a class="nav-link" href="watch.html"> Top 5</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="status" href="contact.php">Connexion</a>
+                  <a class="nav-link" id="status" href="contact.html">Connexion</a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
               </form>
               <div class="search-popup">
-                <form action="resultat.php">
-                  <input type="text" placeholder="Rechercher..." requiered>
-                </form>
+                <input type="text" placeholder="Rechercher...">
               </div>
 
               <script>
@@ -132,7 +141,7 @@
                     <div class="col-md-5">
                       <div class="slider_img-box">
                         <div>
-                          <img src="images/watch.png" alt="" class="" />
+                          <div id="map" style="height: 400px;"></div>
                         </div>
                       </div>
                     </div>
@@ -140,15 +149,17 @@
                       <div class="slider_item-detail">
                         <div>
                           <h1>
-                            Nom de l'endroit (vile, etc)
+                            Paris
                           </h1>
-                          <p>
-                            Indicateur 1 : valeur
-                          </p>
-                          <p>Indicateur 2 : valeur </p>
-                          <p>Indicateur 3 : valeur </p>
+                          <p id="temperature">Température : en attente de données...</p>
+                          <p id="indicateur2-paris">Qualité de l'air (Paris) : En attente de données...</p>
                           <div class="d-flex">
-                            SCORE GLOBAL
+                            <a href="" class="slider-btn1 mr-3">
+                              Read More
+                            </a>
+                            <a href="" id="status" class="slider-btn2">
+                              Connexion
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -167,7 +178,8 @@
                     <div class="col-md-5">
                       <div class="slider_img-box">
                         <div>
-                          <img src="images/watch.png" alt="" class="" />
+                          <div id="map1" style="height: 400px;"></div>
+
                         </div>
                       </div>
                     </div>
@@ -175,15 +187,56 @@
                       <div class="slider_item-detail">
                         <div>
                           <h1>
-                            Nom de l'endroit (vile, etc)
+                            Nanterre
                           </h1>
-                          <p>
-                            Indicateur 1 : valeur
-                          </p>
-                          <p>Indicateur 2 : valeur </p>
-                          <p>Indicateur 3 : valeur </p>
+                          <p id="temperature-nanterre">Température : en attente de données...</p>
+                          <p id="indicateur2-nanterre">Qualité de l'air (Nanterre) : En attente de données...</p>
                           <div class="d-flex">
-                            SCORE GLOBAL
+                            <a href="" class="slider-btn1 mr-3">
+                              Read More
+                            </a>
+                            <a href="" id="status" class="slider-btn2">
+                              Connexion
+                            </a>
+                            <script>
+                              // Fonction pour obtenir la valeur d'un cookie
+                              function getCookie(name) {
+                                var value = "; " + document.cookie;
+                                var parts = value.split("; " + name + "=");
+                                if (parts.length == 2) return parts.pop().split(";").shift();
+                              }
+
+                              // Fonction pour définir un cookie
+                              function setCookie(name, value, minutes) {
+                                var expires = "";
+                                if (minutes) {
+                                  var date = new Date();
+                                  date.setTime(date.getTime() + (minutes * 60 * 1000));
+                                  expires = "; expires=" + date.toUTCString();
+                                }
+                                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+                              }
+
+                              // Mettez à jour le statut en fonction de la présence du cookie
+                              function updateStatus() {
+                                if (getCookie("user")) {
+                                  document.getElementById("status").textContent = "Déconnexion";
+                                } else {
+                                  document.getElementById("status").textContent = "Connexion";
+                                }
+                              }
+
+                              updateStatus();
+
+                              document.getElementById("status").addEventListener("click", function () {
+                                if (getCookie("user")) {
+                                  setCookie("user", "", -1);  // Efface le cookie
+                                } else {
+                                  setCookie("user", "loggedIn", 0.5);  // Crée un cookie avec une durée de vie de 30 minutes
+                                }
+                                updateStatus();
+                              });
+                            </script>
                           </div>
                         </div>
                       </div>
@@ -202,7 +255,8 @@
                     <div class="col-md-5">
                       <div class="slider_img-box">
                         <div>
-                          <img src="images/watch.png" alt="" class="" />
+
+                          <div id="map2" style="height: 400px;"></div>
                         </div>
                       </div>
                     </div>
@@ -210,15 +264,17 @@
                       <div class="slider_item-detail">
                         <div>
                           <h1 class="">
-                            Nom de l'endroit (ville etc)
+                            Evry
                           </h1>
-                          <p>
-                            Indicateur 1 : valeur
-                          </p>
-                          <p>Indicateur 2 : valeur </p>
-                          <p>Indicateur 3 : valeur </p>
+                          <p id="temperature-evry">Température : en attente de données...</p>
+                          <p id="indicateur2-evry">Qualité de l'air (Évry) : En attente de données...</p>
                           <div class="d-flex">
-                            SCORE GLOBAL
+                            <a href="" class="slider-btn1 mr-3">
+                              Read More
+                            </a>
+                            <a href="" id="status" class="slider-btn2">
+                              Connexion
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -252,11 +308,10 @@
     <section class="why_section layout_padding">
       <div class="container">
         <h3 class="custom_heading">
-          Pourquoi nous ?
+          Why choose Us
         </h3>
         <p class="font-weight-bold">
-          Notre solution est éco-responsable et gratuite ! Avec cet outils entre vos main, vous saurez où vivre en île
-          de france et où faire le plus attention à votre consommation !
+          It is a long established fact that a reader will be distracted by the readable content of a page
         </p>
       </div>
       <div class="container">
@@ -267,11 +322,10 @@
             </div>
             <div class="detail_box">
               <h5>
-                Rapidité de résultat
+                Fast Delivery
               </h5>
               <p>
-                communication rapide et efficace, précision des informations à la seconde en temps réel, en fonction des
-                API environnementales les plus performantes !
+                variations of passages of Lorem Ipsum available, but the majority have suffered
               </p>
             </div>
           </div>
@@ -284,8 +338,7 @@
                 Solution gratuite
               </h5>
               <p>
-                Utilisation <b>totalement gratuite </b> de notre solution pour contrôler la qualité de vie dans votre
-                secteur !
+                Utilisation gratuite de nos API pour contrôler la qualité de vie dans notre
               </p>
             </div>
           </div>
@@ -295,11 +348,10 @@
             </div>
             <div class="detail_box">
               <h5>
-                Sécurité
+                Best Quality
               </h5>
               <p>
-                Avec une base de donnée d'utilisateurs chiffrée et des serveurs durcits, vos identifiants sont bien
-                logés.
+                variations of passages of Lorem Ipsum available, but the majority have suffered
               </p>
             </div>
           </div>
@@ -309,11 +361,10 @@
             </div>
             <div class="detail_box">
               <h5>
-                Disponibilité 24h/24
+                24x7 Customer support
               </h5>
               <p>
-                Notre support reste à votre disposition 24 heures sur 24 ! joignable à l'adresse
-                support@hackathon2023.com
+                variations of passages of Lorem Ipsum available, but the majority have suffered
               </p>
             </div>
           </div>
@@ -330,10 +381,10 @@
   <section class="client_section layout_padding-bottom">
     <div class="container">
       <h3 class="custom_heading">
-        Avis des consommateurs
+        Testimonial
       </h3>
       <p class="font-weight-bold">
-        Lisez les différents avis donnés lors de présentation de notre solution à des organismes
+        It is a long established fact that a reader will be distracted by the readable content of a page
       </p>
     </div>
     <div class="container"></div>
@@ -454,7 +505,7 @@
             </div>
             <div class="detail-box">
               <p>
-                Paris Ynov Campus
+                Lorem Ipsum is simply dummy text
               </p>
             </div>
           </div>
@@ -495,70 +546,69 @@
   <section class="container-fluid footer_section">
     <p>
       © 2020 All Rights Reserved By
-      <a href="https://html.design/">Hackathon 2023</a>
+      <a href="https://html.design/">Free Html Templates</a>
     </p>
   </section>
   <!-- footer section -->
 
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-</body>
+
+  <script>
+    // Initialisation de la carte de Paris
+    var mapParis = L.map('map').setView([48.8566, 2.3522], 12); // Coordonnées de Paris et niveau de zoom
+
+    // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(mapParis);
+
+    // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
+</script>
+
 <script>
-    // Initialisation de la carte de paris 
-    var map = L.map('map').setView([48.8566, 2.3522], 12); // Coordonnées de Paris et niveau de zoom
-
-    // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
-  </script>
-
-
-
-  <script>
     // Initialisation de la carte centrée sur Nanterre
-    var map = L.map('map1').setView([48.8911, 2.2046], 14); // Coordonnées de Nanterre et niveau de zoom
+    var mapNanterre = L.map('map1').setView([48.8911, 2.2046], 14); // Coordonnées de Nanterre et niveau de zoom
 
     // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    }).addTo(mapNanterre);
 
     // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
-  </script>
+</script>
 
-  <script>
+<script>
     // Initialisation de la carte centrée sur Évry
-    var map = L.map('map2').setView([48.6208, 2.4408], 14); // Coordonnées d'Évry et niveau de zoom
+    var mapEvry = L.map('map2').setView([48.6208, 2.4408], 14); // Coordonnées d'Évry et niveau de zoom
 
     // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    }).addTo(mapEvry);
 
     // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
-  </script>
+</script>
+
 
   <script>
-    const apiKey1 = '7f53e4156965184fc8909a4a8e0c27f9';
+    const apiKey = '7f53e4156965184fc8909a4a8e0c27f9';
 
     function getWeather() {
       // Paris
       const latitudeParis = 48.8566; // Latitude de Paris
       const longitudeParis = 2.3522; // Longitude de Paris
-      const apiUrlParis = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeParis}&lon=${longitudeParis}&appid=${apiKey1}&units=metric`;
+      const apiUrlParis = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeParis}&lon=${longitudeParis}&appid=${apiKey}&units=metric`;
 
       // Nanterre
       const latitudeNanterre = 48.8911; // Latitude de Nanterre
       const longitudeNanterre = 2.2046; // Longitude de Nanterre
-      const apiUrlNanterre = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeNanterre}&lon=${longitudeNanterre}&appid=${apiKey1}&units=metric`;
+      const apiUrlNanterre = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeNanterre}&lon=${longitudeNanterre}&appid=${apiKey}&units=metric`;
 
       // Évry
       const latitudeEvry = 48.6231; // Latitude de Évry
       const longitudeEvry = 2.4404; // Longitude de Évry
-      const apiUrlEvry = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeEvry}&lon=${longitudeEvry}&appid=${apiKey1}&units=metric`;
+      const apiUrlEvry = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeEvry}&lon=${longitudeEvry}&appid=${apiKey}&units=metric`;
 
       // Obtenez les données pour Paris
       fetch(apiUrlParis)
@@ -593,11 +643,11 @@
   </script>
 
   <script>
-    const apiKey = '1d311b3fa4623a7230594c1db1a5cd65b56f4c62'; // Remplacez par votre clé API WAQI
+    const apiKey1 = '1d311b3fa4623a7230594c1db1a5cd65b56f4c62'; // Remplacez par votre clé API WAQI
 
     function getAirQualityData(city, elementId) {
       // URL de l'API WAQI pour obtenir les données de qualité de l'air
-      const apiUrl = `https://api.waqi.info/feed/${city}/?token=${apiKey}`;
+      const apiUrl = `https://api.waqi.info/feed/${city}/?token=${apiKey1}`;
 
       fetch(apiUrl)
         .then(response => response.json())
@@ -634,4 +684,9 @@
       getAirQualityData('Evry', 'indicateur2-evry');
     };
   </script>
+
+
+
+</body>
+
 </html>

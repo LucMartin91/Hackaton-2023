@@ -1,12 +1,23 @@
 <?php
   include 'db_connect.php';
-  ?>
+?>
 <!DOCTYPE html>
 <html>
 
 <head>
   <!-- Basic -->
   <meta charset="utf-8" />
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -30,15 +41,41 @@
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
+
+  <style>
+    .search-popup {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border: 1px solid #ccc;
+      width: 200px;
+      z-index: 1001;
+    }
+
+    body.show-search::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+  </style>
+
 </head>
 
-<body class="sub_page">
+<body>
   <div class="hero_area">
     <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand" href="index.php">
+          <a class="navbar-brand" href="index.html">
             <span>
               Hackathon 2023
             </span>
@@ -52,206 +89,151 @@
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.php"> About </a>
+                  <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.php"> Top 5 </a>
+                  <a class="nav-link" href="watch.html"> Top 5</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="status" href="contact.php">Connexion</a>
+                  <a class="nav-link" id="status" href="contact.html">Connexion</a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit"></button>
               </form>
+              <div class="search-popup">
+                <input type="text" placeholder="Rechercher...">
+              </div>
+
+              <script>
+                document.querySelector('.nav_search-btn').addEventListener('click', function (event) {
+                  event.preventDefault();
+                  document.querySelector('.search-popup').style.display = 'block';
+                  document.body.classList.add('show-search');
+                });
+
+                document.addEventListener('click', function (event) {
+                  if (!event.target.closest('.search-popup') && !event.target.closest('.nav_search-btn')) {
+                    document.body.classList.remove('show-search');
+                    document.querySelector('.search-popup').style.display = 'none';
+                  }
+                });
+              </script>
             </div>
           </div>
         </nav>
       </div>
     </header>
-    <!-- end header section -->
-
-  </div>
-  <div class="bg">
 
 
-    <!-- brand section -->
+    <section class=" slider_section position-relative">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="slider_item-box">
+              <div class="slider_item-container">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-5">
+                      <div class="slider_img-box">
+                        <div>
+                      <main>
+                        <div class="container">
+                          <!-- Div pour afficher la carte -->
+                          <div id="map" style="height: 400px;"></div>
+                          <!-- Div pour afficher les informations météo -->
+                          <div id="weather-info">
+                              <!-- Les informations météo seront insérées ici via JavaScript -->
+                          </div>
+                          <!-- Div pour afficher l'indice de qualité de l'air -->
+                          <div id="air-quality">
+                              <!-- L'indice de qualité de l'air sera inséré ici via JavaScript -->
+                          </div>
+                        </div>
+                      </main>
+                      <script>
+         var map;
 
-    <section class="brand_section layout_padding2">
-      <div class="container">
-        <div class="brand_heading">
-          <h3 class="custom_heading">
-            Top 5 des meilleures villes en fonction de l'indicateur de qualité de vie
-          </h3>
-          <p class="font-weight-bold">
-            Découvrez les villes du grand paris pour lesquelles l'indice de qualité de vie est le plus élevé
-          </p>
-        </div>
-      </div>
-      <div class="container-fluid brand_item-container">
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-1">
-            <a href="">
-              Voir plus..
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              Indicateur global :<span> Valeur </span>
-            </h5>
-            <h6 class="">
-              Nom de l'endroit
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-2">
-            <a href="">
-              Voir plus..
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              Indicateur global :<span> valeur </span>
-            </h5>
-            <h6 class="">
-              Nom de l'endroit
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-3">
-            <a href="">
-              Voir plus..
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              Indicateur global :<span> valeur </span>
-            </h5>
-            <h6 class="">
-              Nom de l'endroit
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-4">
-            <a href="">
-              Voir plus..
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              Indicateur global :<span> valeur </span>
-            </h5>
-            <h6 class="">
-              Nom de l'endroit
-            </h6>
-          </div>
-        </div>
-        <div class="brand_item-box">
-          <div class="brand_img-box  item-5">
-            <a href="">
-              Voir plus..
-            </a>
-          </div>
-          <div class="brand_detail-box">
-            <h5>
-              Indicateur global :<span> valeur </span>
-            </h5>
-            <h6 class="">
-              Nom de l'endroit
-            </h6>
-          </div>
-        </div>
-      </div>
+// Attendre que le DOM soit chargé
+document.addEventListener('DOMContentLoaded', function () {
+    // Initialisez la carte OpenStreetMap sans définir la vue initiale
+    map = L.map('map');
 
-    </section>
+    // Ajoutez une couche de carte OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+    }).addTo(map);
 
+    // Demandez la géolocalisation de l'utilisateur
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
 
-    <!-- end brand section -->
-
-  </div>
-
-  <!-- info section -->
-  <section class="info_section layout_padding">
-    <div class="container">
-      <div class="info_items">
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-1">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                Paris Ynov Campus
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-2">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                +02 1234567890
-              </p>
-            </div>
-          </div>
-        </a>
-        <a href="">
-          <div class="item ">
-            <div class="img-box box-3">
-              <img src="" alt="">
-            </div>
-            <div class="detail-box">
-              <p>
-                demo@gmail.com
-              </p>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- end info_section -->
-
-  <!-- footer section -->
-  <section class="container-fluid footer_section">
-    <p>
-      © 2023 All Rights Reserved By
-      <a>hackathon 2023</a>
-    </p>
-  </section>
-  <!-- footer section -->
-
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <div class="search-popup">
-    <input type="text" placeholder="Rechercher...">
-  </div>
-
-  <script>
-    document.querySelector('.nav_search-btn').addEventListener('click', function (event) {
-      event.preventDefault();
-      document.querySelector('.search-popup').style.display = 'block';
-      document.body.classList.add('show-search');
-    });
-
-    document.addEventListener('click', function (event) {
-      if (!event.target.closest('.search-popup') && !event.target.closest('.nav_search-btn')) {
-        document.body.classList.remove('show-search');
-        document.querySelector('.search-popup').style.display = 'none';
+            // Ajoutez un marqueur à la position actuelle
+            L.marker([latitude, longitude]).addTo(map)
+                .bindPopup('Vous êtes ici.')
+                .openPopup();
+            // Définissez la vue de la carte sur la position actuelle
+            map.setView([latitude, longitude], 12);
+        }, function(error) {
+            console.error('Erreur lors de l\'obtention de la géolocalisation :', error);
+        });
+    } else {
+        alert('La géolocalisation n\'est pas prise en charge par votre navigateur.');
+    }
+});   
+          function showWeather(latitude, longitude) {
+          const apiKey = '7f53e4156965184fc8909a4a8e0c27f9';
+          const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  
+          fetch(apiUrl)
+              .then(response => response.json())
+              .then(data => {
+                  const temperature = data.main.temp;
+                  const description = data.weather[0].description;
+                  const weatherInfo = `Température : ${temperature} °C`;
+  
+                  // Affichez les informations météo dans la div weather-info
+                  document.getElementById('weather-info').textContent = weatherInfo;
+              })
+              .catch(error => console.error('Erreur lors de la récupération des données météorologiques :', error));
       }
-    });
-  </script>
-</body>
 
-</html>
+// Fonction pour afficher l'indice de qualité de l'air en fonction des coordonnées de latitude et de longitude
+function showAirQuality(latitude, longitude) {
+    const apiKey = '1d311b3fa4623a7230594c1db1a5cd65b56f4c62'; // Remplacez par votre clé API WAQI
+    const apiUrl = `https://api.waqi.info/feed/geo:${latitude};${longitude}/?token=${apiKey}`;
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                const aqi = data.data.aqi;
+                let airQuality;
+
+                if (aqi <= 25) {
+                    airQuality = 'Bon';
+                } else if (aqi <= 50) {
+                    airQuality = 'Moyen';
+                } else if (aqi <= 75) {
+                    airQuality = 'Mauvais';
+                } else {
+                    airQuality = 'Dangereux';
+                }
+
+                const airQualityInfo = `Indice de qualité de l'air : ${aqi}/100 - ${airQuality}`;
+
+                // Affichez l'indice de qualité de l'air dans la div air-quality
+                document.getElementById('air-quality').textContent = airQualityInfo;
+            } else {
+                console.error('Erreur lors de la récupération des données de qualité de l\'air.');
+            }
+        })
+        .catch(error => console.error('Erreur lors de la récupération des données de qualité de l\'air :', error));
+}
+</script>   
+</body>
+</html>                 

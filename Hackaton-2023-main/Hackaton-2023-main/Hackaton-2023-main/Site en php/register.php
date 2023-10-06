@@ -38,7 +38,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
-          <a class="navbar-brand" href="index.php">
+          <a class="navbar-brand" href="index.html">
             <span>
               Hackathon 2023
             </span>
@@ -52,13 +52,13 @@
             <div class="d-flex ml-auto flex-column flex-lg-row align-items-center">
               <ul class="navbar-nav  ">
                 <li class="nav-item active">
-                  <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="about.php"> About </a>
+                  <a class="nav-link" href="about.html"> About </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="watch.php"> Top 5 </a>
+                  <a class="nav-link" href="watch.html"> Top 5 </a>
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -80,7 +80,7 @@
       ENREGISTREMENT
     </h2>
     <div class="container mt-5 pt-5">
-      <form action="index.php">
+      <form action="index.html">
         <div>
           <input type="email" id="emailInput" placeholder="EMAIL">
         </div>
