@@ -552,61 +552,60 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
 
   <script>
-    // Initialisation de la carte de paris 
-    var map = L.map('map').setView([48.8566, 2.3522], 12); // Coordonnées de Paris et niveau de zoom
+    // Initialisation de la carte de Paris
+    var mapParis = L.map('map').setView([48.8566, 2.3522], 12); // Coordonnées de Paris et niveau de zoom
 
     // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    }).addTo(mapParis);
 
     // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
-  </script>
+</script>
 
-
-
-  <script>
+<script>
     // Initialisation de la carte centrée sur Nanterre
-    var map = L.map('map1').setView([48.8911, 2.2046], 14); // Coordonnées de Nanterre et niveau de zoom
+    var mapNanterre = L.map('map1').setView([48.8911, 2.2046], 14); // Coordonnées de Nanterre et niveau de zoom
 
     // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    }).addTo(mapNanterre);
 
     // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
-  </script>
+</script>
 
-  <script>
+<script>
     // Initialisation de la carte centrée sur Évry
-    var map = L.map('map2').setView([48.6208, 2.4408], 14); // Coordonnées d'Évry et niveau de zoom
+    var mapEvry = L.map('map2').setView([48.6208, 2.4408], 14); // Coordonnées d'Évry et niveau de zoom
 
     // Ajout d'une couche de carte de base (par exemple, OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+    }).addTo(mapEvry);
 
     // Vous pouvez ajouter des marqueurs, des polygones, etc., à la carte ici
-  </script>
+</script>
+
 
   <script>
-    const apiKey1 = '7f53e4156965184fc8909a4a8e0c27f9';
+    const apiKey = '7f53e4156965184fc8909a4a8e0c27f9';
 
     function getWeather() {
       // Paris
       const latitudeParis = 48.8566; // Latitude de Paris
       const longitudeParis = 2.3522; // Longitude de Paris
-      const apiUrlParis = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeParis}&lon=${longitudeParis}&appid=${apiKey1}&units=metric`;
+      const apiUrlParis = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeParis}&lon=${longitudeParis}&appid=${apiKey}&units=metric`;
 
       // Nanterre
       const latitudeNanterre = 48.8911; // Latitude de Nanterre
       const longitudeNanterre = 2.2046; // Longitude de Nanterre
-      const apiUrlNanterre = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeNanterre}&lon=${longitudeNanterre}&appid=${apiKey1}&units=metric`;
+      const apiUrlNanterre = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeNanterre}&lon=${longitudeNanterre}&appid=${apiKey}&units=metric`;
 
       // Évry
       const latitudeEvry = 48.6231; // Latitude de Évry
       const longitudeEvry = 2.4404; // Longitude de Évry
-      const apiUrlEvry = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeEvry}&lon=${longitudeEvry}&appid=${apiKey1}&units=metric`;
+      const apiUrlEvry = `https://api.openweathermap.org/data/2.5/weather?lat=${latitudeEvry}&lon=${longitudeEvry}&appid=${apiKey}&units=metric`;
 
       // Obtenez les données pour Paris
       fetch(apiUrlParis)
@@ -641,11 +640,11 @@
   </script>
 
   <script>
-    const apiKey = '1d311b3fa4623a7230594c1db1a5cd65b56f4c62'; // Remplacez par votre clé API WAQI
+    const apiKey1 = '1d311b3fa4623a7230594c1db1a5cd65b56f4c62'; // Remplacez par votre clé API WAQI
 
     function getAirQualityData(city, elementId) {
       // URL de l'API WAQI pour obtenir les données de qualité de l'air
-      const apiUrl = `https://api.waqi.info/feed/${city}/?token=${apiKey}`;
+      const apiUrl = `https://api.waqi.info/feed/${city}/?token=${apiKey1}`;
 
       fetch(apiUrl)
         .then(response => response.json())
