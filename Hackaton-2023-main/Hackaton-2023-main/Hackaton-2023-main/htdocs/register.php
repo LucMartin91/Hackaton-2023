@@ -179,35 +179,11 @@
     });
   </script>
   <script>
-    document.getElementById('submitBtn').addEventListener('click', function (event) {
-      var email = document.getElementById('emailInput').value;
-      var password = document.getElementById('password').value;
-      var confirmPassword = document.getElementById('confirm_password').value;
+document.getElementById('submitBtn').addEventListener('click', function (event) {
+  event.preventDefault();  // Empêche la soumission du formulaire
+  alert("Erreur : base de donnée introuvable");
+});
 
-      // Réinitialise les styles
-      document.getElementById('emailInput').style.borderColor = '';
-      document.getElementById('password').style.borderColor = '';
-      document.getElementById('confirm_password').style.borderColor = '';
-
-      // Vérification du format d'email
-      var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-
-      if (!email.match(emailRegex) || email.trim() === "") {
-        event.preventDefault(); // Empêche la soumission du formulaire
-        document.getElementById('emailInput').style.borderColor = 'red';
-        alert("Veuillez entrer une adresse e-mail valide !");
-        return; // Sort de la fonction pour ne pas exécuter les autres vérifications
-      }
-
-      // Si les mots de passe ne correspondent pas
-      if (password !== confirmPassword) {
-        event.preventDefault(); // Empêche la soumission du formulaire
-        document.getElementById('password').style.borderColor = 'red';
-        document.getElementById('confirm_password').style.borderColor = 'red';
-        alert("Les mots de passe ne correspondent pas!");
-      }
-
-    });
   </script>
 
 

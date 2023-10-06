@@ -336,11 +336,8 @@
   <section class="client_section layout_padding-bottom">
     <div class="container">
       <h3 class="custom_heading">
-        Testimonial
+        Avis
       </h3>
-      <p class="font-weight-bold">
-        It is a long established fact that a reader will be distracted by the readable content of a page
-      </p>
     </div>
     <div class="container"></div>
     <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
