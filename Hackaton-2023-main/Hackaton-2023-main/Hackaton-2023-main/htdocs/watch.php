@@ -249,6 +249,10 @@ function addMarkerByAddress(address) {
                 L.marker([latitude, longitude]).addTo(map)
                     .bindPopup(`Adresse: ${address}`)
                     .openPopup();
+
+                // Appel aux fonctions pour mettre à jour les données météo et la qualité de l'air
+                showWeather(latitude, longitude);
+                showAirQuality(latitude, longitude);
             } else {
                 console.log("Adresse non trouvée");
             }
