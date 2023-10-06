@@ -137,7 +137,7 @@
                       <main>
                       <div class="container">
                         <!-- Div pour afficher la carte -->
-                        <div id="map" style="height: 400px;"></div>
+                        <div id="map" style="height: 400px; width: 1050px;"></div>
                         <!-- Div pour le formulaire d'adresse -->
                         <div id="address-form">
                           <input type="text" id="address" placeholder="Entrez une adresse">
@@ -250,7 +250,7 @@ function addMarkerByAddress(address) {
                     .bindPopup(`Adresse: ${address}`)
                     .openPopup();
 
-                // Appel aux fonctions pour mettre à jour les données météo et la qualité de l'air
+                // Appel aux fonctions pour mettre à jour les données météo e la qualité de l'air
                 showWeather(latitude, longitude);
                 showAirQuality(latitude, longitude);
             } else {
